@@ -1,2 +1,2 @@
 # mmbud
-projekt do zmian
+project for changes
