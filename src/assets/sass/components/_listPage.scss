@@ -1,0 +1,21 @@
+.container {
+    
+    color: _palette(bo);
+    margin: 0 0 (_size(element-margin) * 0.275) 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    letter-spacing: 6px;
+}
+
+.container a {
+    color: _palette(bl);
+    text-shadow: 1px 1px 1px #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 13px 13px;
+    z-index: 0;
+    cursor: pointer;
+}

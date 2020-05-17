@@ -1,0 +1,70 @@
+#footer {
+    @include vendor('transition', 'opacity 0.5s ease-in-out');
+    bottom: 1em;
+    color: _palette(bo);
+    left: 1em;
+    opacity: 1;
+    position: fixed;
+  
+    .icons {
+      margin: 0 0 (_size(element-margin) * 0.01) 0;
+      text-shadow: 0px 0px 5px #000000;
+    }
+  
+    .copyright {
+      font-size: 0.8em;
+      list-style: none;
+      padding: 0;
+  
+      li {
+        color: _palette(bl);
+        text-shadow: 0px 0px 5px #FFFFFF;
+        border-left: solid 1px _palette(bl);
+        display: inline-block;
+        line-height: 1em;
+        margin: 0 0 0 0.50em;
+        padding: 0 0 0 0.50em;
+  
+        &:first-child {
+          border-left: 0;
+          margin-left: 0;
+          padding-left: 0;
+        }
+      }
+  
+      a {
+        color: inherit;
+      }
+    }
+  
+    &:hover {
+      opacity: 1;
+    }
+  
+    > :last-child {
+      margin-bottom: 0;
+    }
+  
+    @include breakpoint('<=xlarge') {
+      bottom: 1em;
+      left: 1em;
+    }
+  
+    @include breakpoint('<=small') {
+      bottom: 1em;
+      left: 1em;
+    }
+  
+    @include breakpoint('<=xxsmall') {
+      bottom: 1em;
+      left: 1em;
+    }
+  
+    @include breakpoint('short') {
+      bottom: auto;
+      left: auto;
+      margin: (_size(element-margin) * 0.5) 0 0 0;
+      position: relative;
+    }
+  }
+  

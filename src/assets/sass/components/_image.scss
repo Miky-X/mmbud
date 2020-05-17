@@ -1,0 +1,56 @@
+.image {
+
+  border-radius: _size(border-radius);
+  border: 0;
+  display: wrap;
+  position: relative;
+  padding-top: 30;
+
+  img {
+    border-radius: _size(border-radius);
+    display: block;
+  }
+
+  &.left,
+  &.right {
+    max-width: 40%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &.left {
+    float: left;
+    padding: 0 1.5em 1em 0;
+    top: 0.25em;
+  }
+
+  &.fit {
+    display: block;
+    margin: 0 0 (_size(element-margin) * 1.5) 0;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &.main {
+    display: block;
+    margin: 0 0 (_size(element-margin) * 1.5) 0;
+    width: 100%;
+
+    img {
+      width: 50%;
+    }
+
+    @include breakpoint('<=small') {
+      margin: 0 0 _size(element-margin) 0;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

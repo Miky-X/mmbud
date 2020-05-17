@@ -1,0 +1,265 @@
+.tiles {
+  $gutter: _size(gutter);
+  $duration: 0.5s;
+  $ease: 'ease';
+
+  display: inline-block;
+  margin: 16px;
+  position: relative;
+  &:before {
+    border-radius: 5px;
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+  }
+
+  article {
+    //od tond
+    @include vendor(
+                    'transition',
+                            ('transform #{$duration} #{$ease}', 'opacity #{$duration} #{$ease}')
+    );
+    position: relative;
+    width: calc(#{(100% / 2)} - #{$gutter * 1});
+    margin: $gutter 0 0 $gutter;
+    object-fit: fill;
+
+    > .image {
+      @include vendor('transition', 'transform #{$duration} #{$ease}');
+
+      display: block;
+      box-shadow: 0px 0px 10px 7px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      width: 100%;
+      border-radius: _size(border-radius);
+      overflow: hidden;
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      &:before {
+        @include vendor('pointer-events', 'none');
+        @include vendor(
+                        'transition',
+                                (
+                                        'background-color #{$duration} #{$ease}',
+                                        'opacity #{$duration} #{$ease}'
+                                )
+        );
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: 1;
+        opacity: 0,3; // zmiana przyciemniena obrazu!!!!!!!!
+      }
+
+      &:after {
+        @include vendor('pointer-events', 'none');
+        @include vendor('transition', 'opacity #{$duration} #{$ease}');
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        opacity: 0; // poczatkowe przyciemniene zdjecia!!!!!!
+        z-index: 2;
+      }
+    }
+
+    > a {
+      @include vendor('display', 'flex');
+      @include vendor('flex-direction', 'column');
+      @include vendor('align-items', 'center');
+      @include vendor('justify-content', 'center');
+      @include vendor(
+                      'transition',
+                              (
+                                      'background-color #{$duration} #{$ease}',
+                                      'transform #{$duration} #{$ease}'
+                              )
+      );
+      font-size: 1.5em; // wielkosc tekstu w obrazie
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 1em;
+      border-radius: _size(border-radius);
+      border-bottom: 0;
+      color: _palette(bl);
+      text-align: center;
+      text-decoration: none;
+      z-index: 3;
+
+      > :last-child {
+        margin: 0;
+      }
+
+      &:hover {
+        color: _palette(bl) !important; // kolor tekstu w obrazie
+      }
+
+      h2 {
+        margin: 0;
+      }
+
+      .content {
+        @include vendor(
+                        'transition',
+                                ('max-height #{$duration} #{$ease}', 'opacity #{$duration} #{$ease}')
+        );
+        width: 100%;
+        max-height: 0;
+        line-height: 1.5;
+        margin-top: 0.35em;
+        opacity: 0;
+
+        > :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    // do tond
+    &.style1 {
+      > .image:after {
+        background-color: _palette(bl); // koror przyciemniena zdjecia
+      }
+    }
+
+    body:not(.is-touch) & {
+      &:hover {
+        > .image {
+          @include vendor('transform', 'scale(1.065)'); // powiekszenie zdjecia po najechaiu
+
+          &:before {
+            background-color: _palette(bo);
+            opacity: 0.7;
+          }
+
+          &:after {
+            opacity: 0;
+          }
+        }
+
+        .content {
+          max-height: 15em;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  * + & {
+    margin-top: _size(element-margin);
+  }
+
+  body.is-preload & {
+    article {
+      @include vendor('transform', 'scale(0.9)');
+      opacity: 0;
+    }
+  }
+  .main-body.is-preload & {
+    article {
+      @include vendor('transform', 'scale(0.9)');
+      opacity: 0;
+    }
+  }
+
+  body.is-touch & {
+    article {
+      .content {
+        max-height: 15em;
+        opacity: 1;
+      }
+    }
+  }
+
+  // wielkosci zdjec i ilosci w kolumnach
+  @include  breakpoint('<=xlarge') {
+    $gutter: _size(gutter) * 1;
+    padding: 100px;
+    columns: 1;
+
+    margin: ($gutter * -1) 0 0 ($gutter * -1);
+
+    article {
+      width: calc(#{(100%)} - #{$gutter * 1});
+      margin: $gutter 0 0 $gutter;
+    }
+  }
+
+  @include breakpoint('<=large') {
+    $gutter: _size(gutter) * 1;
+    padding: 80px;
+    columns: 1;
+
+    margin: ($gutter * -1) 0 0 ($gutter * -1);
+
+    article {
+      width: calc(#{(100%)} - #{$gutter * 1});
+      margin: $gutter 0 0 $gutter;
+    }
+  }
+
+  @include breakpoint('<=medium') {
+    $gutter: _size(gutter) * 1;
+    padding: 60px;
+    columns: 1;
+
+    margin: ($gutter * -1) 0 0 ($gutter * -1);
+
+    article {
+      width: calc(#{(100%)} - #{$gutter * 1});
+      margin: ($gutter) 0 0 $gutter;
+    }
+  }
+
+  @include breakpoint('<=small') {
+    $gutter: _size(gutter) * 1;
+    padding: 40px;
+    columns: 1;
+
+    margin: ($gutter * -1) 0 0 ($gutter * -1);
+
+    article {
+      width: calc(#{(100%)} - #{$gutter * 1});
+      margin: $gutter 0 0 $gutter;
+
+      &:hover {
+        > .image {
+          @include vendor('transform', 'scale(1.0)');
+        }
+      }
+    }
+  }
+
+  @include breakpoint('<=xsmall') {
+    $gutter: _size(gutter) * 0.5;
+    padding: 30px;
+
+    columns: 1;
+
+    margin: 0;
+
+    article {
+      width: 100%;
+      margin: $gutter 0 0 0;
+    }
+  }
+}

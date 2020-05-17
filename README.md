@@ -1,2 +1,1 @@
-# mmbud
-project for changes
+# Portfolio Monika Kaczmarek
